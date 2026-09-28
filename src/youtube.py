@@ -27,3 +27,16 @@ def extract_video_id(url):
     return url.split("youtu.be/")[1].split("?")[0]
   
   raise ValueError("Invalid YouTube URL.")
+
+def get_video_info(video_id):
+  """
+  Get basic information about a YouTube video.
+  """
+  youtube = create_youtube_client()
+  response = youtube.videos().list(
+    part="snippet",
+    id=video_id
+  ).execute()
+  
+  
+  
