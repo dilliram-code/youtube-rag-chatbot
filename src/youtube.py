@@ -13,3 +13,17 @@ def create_youtube_client():
     developerKey=YOUTUBE_API_KEY
   )
   
+  return youtube
+
+def extract_video_id(url):
+  """
+  Extract the video ID from a YouTube URL
+  """
+  
+  if "v=" in url:
+    return url.split("v=")[1].split("&")[0]
+  
+  if "youtu.be/" in url:
+    return url.split("youtu.be/")[1].split("?")[0]
+  
+  raise ValueError("Invalid YouTube URL.")
