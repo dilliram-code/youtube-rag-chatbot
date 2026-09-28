@@ -38,5 +38,14 @@ def get_video_info(video_id):
     id=video_id
   ).execute()
   
+  if not response["items"]:
+    raise ValueError("Vido not found.")
   
+  snippet = response["items"][0]["snippet"]
+  
+  return {
+    "title": snippet["title"],
+    "description": snippet["description"],
+    "channel": snippet["channelTitle"]
+  }
   
