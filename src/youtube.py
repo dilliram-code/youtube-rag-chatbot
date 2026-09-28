@@ -49,3 +49,25 @@ def get_video_info(video_id):
     "channel": snippet["channelTitle"]
   }
   
+def search_youtube(query):
+  """
+  Search YouTube for videos.
+  """
+  youtube = create_youtube_client()
+  
+  response = youtube.search().list(
+    part = "snipppet",
+    q = query,
+    type="video",
+    maxResults=5
+  ).execute()
+  
+  results = []
+  for item in response["items"]:
+    results.append({
+      "title": item["snippet"]["title"],
+      "channel": item["snippet"]["channelTitle"],
+      "video_id": item["id"]["videoId"]
+    })
+  
+  return results
